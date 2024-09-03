@@ -715,8 +715,10 @@ class OpenFE:
         length = int(np.ceil(len(candidate_features) / self.n_jobs / 4))
         n = int(np.ceil(len(candidate_features) / length))
         random.shuffle(candidate_features)
-        for f in candidate_features:
-            f.delete()
+        # for f in candidate_features:
+        #     f.delete()
+        for f in self.candidate_features_list:
+            del f
         with ProcessPoolExecutor(max_workers=self.n_jobs) as ex:
             with tqdm(total=n) as progress:
                 for i in range(n):
