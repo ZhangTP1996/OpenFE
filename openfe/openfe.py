@@ -717,7 +717,7 @@ class OpenFE:
         random.shuffle(candidate_features)
         # for f in candidate_features:
         #     f.delete()
-        for f in self.candidate_features_list:
+        for f in self.candidate_features:
             del f
         with ProcessPoolExecutor(max_workers=self.n_jobs) as ex:
             with tqdm(total=n) as progress:
