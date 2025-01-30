@@ -13,7 +13,7 @@ from sklearn.model_selection import train_test_split, StratifiedKFold, KFold
 from .FeatureGenerator import *
 from concurrent.futures import ProcessPoolExecutor
 from sklearn.feature_selection import mutual_info_regression, mutual_info_classif
-from sklearn.metrics import mean_squared_error, log_loss, roc_auc_score
+from sklearn.metrics import root_mean_squared_error, log_loss, roc_auc_score
 import scipy.special
 from datetime import datetime
 import warnings
@@ -562,7 +562,7 @@ class TwoStageFeatureSelector:
             init_metric = log_loss(label, scipy.special.softmax(pred, axis=1),
                                    labels=list(range(pred.shape[1])))
         elif self.metric == 'rmse':
-            init_metric = mean_squared_error(label, pred, squared=False)
+            init_metric = root_mean_squared_error(label, pred)
         elif self.metric == 'auc':
             init_metric = roc_auc_score(label, scipy.special.expit(pred))
         else:
